@@ -41,5 +41,11 @@ namespace EnglishManager.Infrastructure.Repositories
         {
             return await _context.Users.AnyAsync(u => u.Email == email);
         }
+
+        public async Task<Dictionary<int, string>> GetUserNamesAsync()
+        {
+            var users = await _context.Users.ToListAsync();
+            return users.ToDictionary(u => u.Id, u => $"{u.FirstName} {u.LastName}");
+        }
     }
 }

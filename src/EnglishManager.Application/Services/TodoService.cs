@@ -11,6 +11,7 @@ namespace EnglishManager.Application.Services
     {
         private readonly ITodoRepository _todoRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUserRepository _userRepository;
 
         public TodoService(ITodoRepository todoRepository, IHttpContextAccessor httpContextAccessor)
         {
@@ -27,11 +28,22 @@ namespace EnglishManager.Application.Services
             return int.Parse(userIdClaim.Value);
         }
 
+        // src/EnglishManager.Application/Services/TodoService.cs
         public async Task<IEnumerable<TodoDto>> GetAllTodosAsync()
         {
-            var userId = GetCurrentUserId();
             var todos = await _todoRepository.GetAllAsync();
-            return todos.Where(t => t.UserId == userId).Select(todo => MapToDto(todo));
+            var userNames = await _userRepository.GetUserNamesAsync(); // Lấy tên người dùng từ repository
+
+            return todos.Select(todo => new TodoDto
+            {
+                Id = todo.Id,
+                Title = todo.Title,
+                Description = todo.Description,
+                IsCompleted = todo.IsCompleted,
+                CreatedDate = todo.CreatedDate,
+                CompletedDate = todo.CompletedDate,
+                UserName = userNames[todo.UserId] // Lấy tên người dùng từ dictionary
+            });
         }
 
         public async Task<TodoDto> GetTodoByIdAsync(int id)
@@ -102,7 +114,6 @@ namespace EnglishManager.Application.Services
                 IsCompleted = todo.IsCompleted,
                 CreatedDate = todo.CreatedDate,
                 CompletedDate = todo.CompletedDate,
-                UserId = todo.UserId
             };
         }
     }
