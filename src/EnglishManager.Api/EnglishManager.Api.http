@@ -1,6 +1,30 @@
 @baseURL = http://localhost:5083
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZW1haWwiOiJoaWV1Lm5ndXllbkB0ZWNoY28udm4iLCJqdGkiOiJlNWJiMzc4Zi0xMjNlLTQ2MjctYmQ4YS1hZjFiZDBlM2IzMzEiLCJleHAiOjE3NDYzNTc2MTcsImlzcyI6ImVuZ2xpc2htYW5hZ2VyIiwiYXVkIjoiZW5nbGlzaG1hbmFnZXIifQ.VGz5wusVa-DeGX_viq2HBk5MK5iAmrszf0UCHlhhBFM
 
+### Create a new user
+POST {{baseURL}}/api/Auth/register
+Content-Type: application/json
 
-### Get all users
+{
+  "email": "hieu.nguyen@techco.vn",
+  "password": "123456",
+  "firstName": "Hieu",
+  "lastName": "Nguyen"
+}
+
+### get todos with token
 GET {{baseURL}}/api/Todo
-### Get user by ID
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+### add new todo
+POST {{baseURL}}/api/Todo
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Todo 1",
+  "description": "Todo 1 description"
+}
+
+
