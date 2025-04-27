@@ -1,5 +1,6 @@
 namespace EnglishManager.Application.DTOs
 {
+    // src/EnglishManager.Application/DTOs/TodoDto.cs
     public class TodoDto
     {
         public int Id { get; set; }
@@ -8,7 +9,7 @@ namespace EnglishManager.Application.DTOs
         public bool IsCompleted { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? CompletedDate { get; set; }
-        public int UserId { get; set; }
+        public string UserName { get; set; } // Thêm thuộc tính này
     }
 
     public class CreateTodoDto

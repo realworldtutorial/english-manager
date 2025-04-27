@@ -9,5 +9,6 @@ namespace EnglishManager.Domain.Repositories
         Task<User> CreateAsync(User user);
         Task UpdateAsync(User user);
         Task<bool> EmailExistsAsync(string email);
+        Task<Dictionary<int, string>> GetUserNamesAsync();
     }
 }
