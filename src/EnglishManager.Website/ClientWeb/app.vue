@@ -1,7 +1,7 @@
 <template>
-   <UApp>
+   <NuxtLayout>
     <NuxtPage/>
-   </UApp>
+   </NuxtLayout>
 </template>
 <script setup lang="ts">
 const message = ref('xin chao cac ban')

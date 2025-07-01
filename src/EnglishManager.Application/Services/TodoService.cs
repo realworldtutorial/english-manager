@@ -13,10 +13,11 @@ namespace EnglishManager.Application.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserRepository _userRepository;
 
-        public TodoService(ITodoRepository todoRepository, IHttpContextAccessor httpContextAccessor)
+        public TodoService(ITodoRepository todoRepository, IHttpContextAccessor httpContextAccessor, IUserRepository userRepository)
         {
             _todoRepository = todoRepository;
             _httpContextAccessor = httpContextAccessor;
+            _userRepository = userRepository;
         }
 
         private int GetCurrentUserId()
@@ -46,7 +47,7 @@ namespace EnglishManager.Application.Services
             });
         }
 
-        public async Task<TodoDto> GetTodoByIdAsync(int id)
+        public async Task<TodoDto?> GetTodoByIdAsync(int id)
         {
             var userId = GetCurrentUserId();
             var todo = await _todoRepository.GetByIdAsync(id);

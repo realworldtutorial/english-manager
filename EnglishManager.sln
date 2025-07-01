@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishManager.Api", "src\E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishManager.RazorWebsite", "src\EnglishManager.RazorWebsite\EnglishManager.RazorWebsite.csproj", "{08A860B0-BB86-472D-A69D-F6701DCAC59E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EnglishManager.Website", "EnglishManager.Website", "{A99ADFE1-4173-3541-3DAD-72F3E565EEBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,5 +97,6 @@ Global
 		{3914B43D-988B-4100-AFE8-838923096B3B} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{E0481414-1D3B-487A-B2B3-22C1DB0517E9} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{08A860B0-BB86-472D-A69D-F6701DCAC59E} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{A99ADFE1-4173-3541-3DAD-72F3E565EEBC} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 EndGlobal

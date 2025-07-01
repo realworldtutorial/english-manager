@@ -19,7 +19,7 @@ namespace EnglishManager.Infrastructure.Repositories
             return await _context.Todos.ToListAsync();
         }
 
-        public async Task<Todo> GetByIdAsync(int id)
+        public async Task<Todo?> GetByIdAsync(int id)
         {
             return await _context.Todos.FindAsync(id);
         }
