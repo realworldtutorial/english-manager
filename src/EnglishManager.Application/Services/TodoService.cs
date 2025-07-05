@@ -43,7 +43,7 @@ namespace EnglishManager.Application.Services
                 IsCompleted = todo.IsCompleted,
                 CreatedDate = todo.CreatedDate,
                 CompletedDate = todo.CompletedDate,
-                UserName = userNames[todo.UserId] // Lấy tên người dùng từ dictionary
+                UserName = userNames.ContainsKey(todo.UserId) ? userNames[todo.UserId] : "Unknown" // Lấy tên người dùng từ dictionary
             });
         }
 
