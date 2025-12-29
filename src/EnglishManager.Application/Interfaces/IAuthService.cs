@@ -7,5 +7,6 @@ namespace EnglishManager.Application.Interfaces
         Task<AuthResponseDto> RegisterAsync(RegisterUserDto registerDto);
         Task<AuthResponseDto> LoginAsync(LoginDto loginDto);
         string GenerateJwtToken(UserDto user);
+        RefreshTokenDto GetRefreshToken();
     }
 }

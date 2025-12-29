@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using EnglishManager.Application.DTOs;
 using EnglishManager.Application.Interfaces;
@@ -42,10 +43,12 @@ namespace EnglishManager.Application.Services
 
             var userDto = MapToDto(user);
             var token = GenerateJwtToken(userDto);
+            var refreshToken = GetRefreshToken();
 
             return new AuthResponseDto
             {
                 Token = token,
+                RefreshToken = refreshToken.Token,
                 User = userDto
             };
         }
@@ -73,9 +76,9 @@ namespace EnglishManager.Application.Services
 
         public string GenerateJwtToken(UserDto user)
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"] ?? ""));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
+            var expiration = DateTime.UtcNow.AddMinutes(15);
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
@@ -87,11 +90,20 @@ namespace EnglishManager.Application.Services
                 issuer: _configuration["Jwt:Issuer"],
                 audience: _configuration["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddDays(7),
+                expires: expiration,
                 signingCredentials: credentials
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public RefreshTokenDto GetRefreshToken()
+        {
+            return new RefreshTokenDto
+            {
+                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)), // Placeholder, should be replaced with actual user data
+                Expires = DateTime.UtcNow.AddDays(7)
+            };
         }
 
         private static UserDto MapToDto(User user)
